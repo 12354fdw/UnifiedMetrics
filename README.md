@@ -1,9 +1,10 @@
 ![UnifiedMetrics](.github/assets/banner.png)
 
-[![License](https://img.shields.io/github/license/Cubxity/UnifiedMetrics?style=flat-square)](COPYING.LESSER)
-[![Workflow Status](https://img.shields.io/github/workflow/status/Cubxity/UnifiedMetrics/gradle-preview-ci/master?style=flat-square)](https://github.com/Cubxity/UnifiedMetrics/actions)
-[![Maven Central](https://img.shields.io/maven-central/v/dev.cubxity.plugins/unifiedmetrics-api?color=green&style=flat-square)](https://search.maven.org/search?q=g:dev.cubxity.plugins%20a:unifiedmetrics-api)
-[![Discord](https://img.shields.io/badge/join-discord-blue?style=flat-square)](https://discord.gg/kDDhqJmPpA)
+> **This is an unofficial fork of [UnifiedMetrics](https://github.com/Cubxity/UnifiedMetrics) updated for Minecraft 26.1 (Fabric only).**
+> Original project by [Cubxity](https://github.com/Cubxity), licensed under [GNU LGPLv3](COPYING.LESSER).
+> This fork drops all non-Fabric platforms and updates the build toolchain to support MC 26.1's unobfuscated mappings.
+
+---
 
 UnifiedMetrics is a fully-featured free and open-source metrics collection plugin for Minecraft servers. This project is
 licensed under [GNU LGPLv3](COPYING.LESSER).
@@ -79,7 +80,8 @@ and [YourKit YouMonitor](https://www.yourkit.com/youmonitor/).
 
 **Requirements:**
 
-- JDK 8+ (16+ for Fabric, 17+ for Minestom)
+- JDK 25
+- Gradle 9.4.1+ (via wrapper)
 - Git (Optional)
 
 To build UnifiedMetrics, you need to obtain the source code first. You can download the source from GitHub or use the

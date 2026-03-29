@@ -25,14 +25,21 @@ import dev.cubxity.plugins.metrics.fabric.bootstrap.UnifiedMetricsFabricBootstra
 
 class WorldCollector(private val bootstrap: UnifiedMetricsFabricBootstrap) : Collector {
     override fun collect(): List<Metric> {
-        val worlds = bootstrap.server.worlds
-        val samples = ArrayList<Metric>(worlds.count() * 3)
+        val server = bootstrap.server
+
+        val worlds = server.levelKeys().mapNotNull { server.getLevel(it) }
+        val samples = ArrayList<Metric>(worlds.size * 3)
 
         worlds.forEach { world ->
-            val tags = mapOf("world" to world.registryKey.value.toString())
-            samples.add(GaugeMetric(Metrics.Server.WorldEntitiesCount, tags, world.iterateEntities().count()))
-            samples.add(GaugeMetric(Metrics.Server.WorldPlayersCount, tags, world.players.size))
-            samples.add(GaugeMetric(Metrics.Server.WorldLoadedChunks, tags, world.chunkManager.loadedChunkCount))
+            val tags = mapOf("world" to world.dimension().toString())
+
+            val entityCount = world.getAllEntities().toList().size
+            val playerCount = world.players().size
+            val chunkCount = world.chunkSource.loadedChunksCount
+
+            samples.add(GaugeMetric(Metrics.Server.WorldEntitiesCount, tags, entityCount.toDouble()))
+            samples.add(GaugeMetric(Metrics.Server.WorldPlayersCount, tags, playerCount.toDouble()))
+            samples.add(GaugeMetric(Metrics.Server.WorldLoadedChunks, tags, chunkCount.toDouble()))
         }
 
         return samples

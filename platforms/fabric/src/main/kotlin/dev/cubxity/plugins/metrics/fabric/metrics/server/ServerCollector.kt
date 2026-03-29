@@ -27,10 +27,12 @@ import net.fabricmc.loader.api.FabricLoader
 class ServerCollector(private val bootstrap: UnifiedMetricsFabricBootstrap): Collector {
     override fun collect(): List<Metric> {
         val server = bootstrap.server
+        val playerList = server.playerList
+
         return listOf(
-            GaugeMetric(Metrics.Server.Plugins, value = FabricLoader.getInstance().allMods.size),
-            GaugeMetric(Metrics.Server.PlayersCount, value = server.currentPlayerCount),
-            GaugeMetric(Metrics.Server.PlayersMax, value = server.maxPlayerCount)
+            GaugeMetric(Metrics.Server.Plugins, value = FabricLoader.getInstance().allMods.size.toDouble()),
+            GaugeMetric(Metrics.Server.PlayersCount, value = playerList.players.size.toDouble()),
+            GaugeMetric(Metrics.Server.PlayersMax, value = playerList.maxPlayers.toDouble())
         )
     }
 }

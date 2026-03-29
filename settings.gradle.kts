@@ -1,3 +1,20 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven {
+            name = "Fabric"
+            url = uri("https://maven.fabricmc.net/")
+        }
+    }
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == "net.fabricmc.fabric-loom" || requested.id.id == "net.fabricmc.fabric-loom-remap") {
+                useModule("fabric-loom:fabric-loom.gradle.plugin:1.15.5")
+            }
+        }
+    }
+}
+
 /*
  *     This file is part of UnifiedMetrics.
  *
@@ -25,10 +42,10 @@ include(modulePrefix + "api")
 include(modulePrefix + "common")
 include(modulePrefix + "core")
 
-include(modulePrefix + platformPrefix + "bukkit")
+//include(modulePrefix + platformPrefix + "bukkit")
 //include(modulePrefix + platformPrefix + "minestom")
-include(modulePrefix + platformPrefix + "velocity")
-include(modulePrefix + platformPrefix + "bungee")
+//include(modulePrefix + platformPrefix + "velocity")
+//include(modulePrefix + platformPrefix + "bungee")
 include(modulePrefix + platformPrefix + "fabric")
 
 include(modulePrefix + driverPrefix + "influx")
@@ -39,22 +56,13 @@ project(modulePrefix + "common").projectDir = File(rootDir, "common")
 project(modulePrefix + "core").projectDir = File(rootDir, "core")
 
 val platformsDir = File(rootDir, "platforms")
-project(modulePrefix + platformPrefix + "bukkit").projectDir = File(platformsDir, "bukkit")
+//project(modulePrefix + platformPrefix + "bukkit").projectDir = File(platformsDir, "bukkit")
+//project(modulePrefix + platformPrefix + "bukkit").projectDir = File(platformsDir, "bukkit")
 //project(modulePrefix + platformPrefix + "minestom").projectDir = File(platformsDir, "minestom")
-project(modulePrefix + platformPrefix + "velocity").projectDir = File(platformsDir, "velocity")
-project(modulePrefix + platformPrefix + "bungee").projectDir = File(platformsDir, "bungee")
+//project(modulePrefix + platformPrefix + "velocity").projectDir = File(platformsDir, "velocity")
+//project(modulePrefix + platformPrefix + "bungee").projectDir = File(platformsDir, "bungee")
 project(modulePrefix + platformPrefix + "fabric").projectDir = File(platformsDir, "fabric")
 
 val driversDir = File(rootDir, "drivers")
 project(modulePrefix + driverPrefix + "influx").projectDir = File(driversDir, "influx")
 project(modulePrefix + driverPrefix + "prometheus").projectDir = File(driversDir, "prometheus")
-
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven {
-            name = "Fabric"
-            url = uri("https://maven.fabricmc.net/")
-        }
-    }
-}
