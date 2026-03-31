@@ -27,7 +27,7 @@ import dev.cubxity.plugins.metrics.common.metric.Metrics
 import dev.cubxity.plugins.metrics.fabric.events.TickEvent
 
 class TickCollection : CollectorCollection {
-    private val tickDuration = Histogram(
+    private var tickDuration = Histogram(
         Metrics.Server.TickDurationSeconds,
         sumStoreFactory = VolatileDoubleStore,
         countStoreFactory = VolatileLongStore
